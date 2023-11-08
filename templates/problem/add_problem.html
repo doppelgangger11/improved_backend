@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Problem</title>
+        <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <p>
+        <a href="{% url 'login' %}" type="button"><button>Login</button></a>
+        <a href="{% url 'signup' %}" type="button"><button>Signup</button></a>
+    </p>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field, error_list in form.errors.items %}
+        <strong>{{ field }}:</strong>
+        <ul>
+            {% for error in error_list %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class = "wrapper">
+        <form method="POST" action="{% url 'add_problem' %}">
+            {% csrf_token %}
+            
+            <p>Enter your name</p>
+            <input type="text" name="name">
+            
+            <p>Enter your phone number</p>
+            <input type="number" name="phone">
+            
+            <p>Enter your E-mail</p>
+            <input type="text" name="email">
+            
+            <p>Describe your problem</p>
+            <textarea name="description" style="height: 300px; width: 450px; resize: none;" placeholder="Enter your problem here"></textarea>
+
+            <!-- <p>Select a User who'll help you</p>
+            <select name="assigned_user">
+                {% for a_user in assigned_users %}
+                    <option value="{{ a_user.id }}">{{ a_user.username }}</option>
+                {% endfor %}
+            </select>
+             -->
+
+            <p>This user will help you with your problem</p>
+            {{ assigned_user }}
+
+            <p>Select Priority</p>
+            <select name="priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+
+            <input type="submit" value="Submit">
+            <p> </p>
+        </form>
+    </div>
+</body>
+</html>

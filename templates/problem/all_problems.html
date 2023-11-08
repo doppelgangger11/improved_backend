@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problems</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <a href="{% url 'logout' %}"><button>Logout</button></a>
+    <h4>
+        {% block content %}
+            <h1>All Problems</h1>
+            <ul>
+                <h3>New Problems</h3>
+                {% for problem in problems %}
+                    {% if problem.status == 'new' %}
+                        <li>
+                            <a href="{% url 'problem_page' problem.id %}">
+                                <strong>Name:</strong> {{ problem.name }}<br>
+                                <strong>Priority:</strong> {{ problem.priority }}<br>
+                                <strong>Status:</strong> {{ problem.status }}<br>
+                                
+                                <!-- <strong>Phone:</strong> {{ problem.phone }}<br>
+                                    <strong>Email:</strong> {{ problem.email }}<br>
+                                    <p>---------------------------------------------------------------------------</p>
+                                    <strong>Description:</strong> {{ problem.description }}<br>
+                                    <p>---------------------------------------------------------------------------</p>
+                                    <strong>Status:</strong> {{ problem.status }}<br>
+                                    <strong>Date:</strong> {{ problem.date }}<br>
+                                    <p> </p>
+                                    <form method="POST" action="{% url 'delete_problem' problem.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Delete</button> -->
+                            </a>
+                            <p> </p>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <h3>Resolved Problems</h3>
+                {% for problem in problems %}
+                    {% if problem.status == 'resolved' %}
+                        <li>
+                            <a href="{% url 'problem_page' problem.id %}">
+                                <strong>Name:</strong> {{ problem.name }}<br>
+                                <strong>Priority:</strong> {{ problem.priority }}<br>
+                                <strong>Status:</strong> {{ problem.status }}<br>
+
+                                <!-- <strong>Phone:</strong> {{ problem.phone }}<br>
+                                <strong>Email:</strong> {{ problem.email }}<br>
+                                <p>---------------------------------------------------------------------------</p>
+                                <strong>Description:</strong> {{ problem.description }}<br>
+                                <p>---------------------------------------------------------------------------</p>
+                                <strong>Status:</strong> {{ problem.status }}<br>
+                                <strong>Date:</strong> {{ problem.date }}<br>
+                                <p> </p>
+                                <form method="POST" action="{% url 'delete_problem' problem.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button> -->
+                            </a>
+                            <p> </p>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endblock %}
+    </h4>
+</body>
+</html>

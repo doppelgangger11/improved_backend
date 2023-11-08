@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <strong>Name:</strong> {{ problem.name }}<br>
+    <p> </p>
+    <strong>Phone:</strong> {{ problem.phone }}<br>
+    <p> </p>
+    <strong>Email:</strong> {{ problem.email }}<br>
+    <p> </p>
+    <p>---------------------------------------------------------------------------</p>
+    <strong>Description:</strong> {{ problem.description }}<br>
+    <p>---------------------------------------------------------------------------</p>
+    <strong>Priority:</strong> {{ problem.priority }}<br>
+    <p> </p>
+    <strong>Date:</strong> {{ problem.date }}<br>
+    <p> </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p> </p>
+        <button type="submit">Save</button>
+    </form>
+    <p> </p>
+    <a href="{% url 'show_problems_moder' %}"><button>Back</button></a>
+    <p> </p>
+    <form method="POST" action="{% url 'delete_problem' problem.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    <p> </p>
+</body>
+</html>

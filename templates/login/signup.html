@@ -1,0 +1,25 @@
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+  <div class = "wrapper">
+  <form method="post" class="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Sign up" class="btn">
+
+    <a href="{% url 'add_problem' %}"><button>Back</button></a>
+
+  </form>
+
+  </div>
+</body>
+</html>
